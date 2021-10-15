@@ -60,7 +60,7 @@ if ($detectarError==1) {
 }else {
   
   
-  $conexion = mysqli_connect("localhost", "root", "", "usuarios") or
+  $conexion = mysqli_connect("localhost", "root", "", "clientes") or
     die("Problemas con la conexion");
 
   $consulta = mysqli_query($conexion, "select Usuario_email,Usuario_clave
