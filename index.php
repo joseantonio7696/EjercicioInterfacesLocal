@@ -62,9 +62,14 @@ session_start();
             EL CORREO INTRODUCIDO NO ESTA REGISTRADO, INTENTALO DE NUEVO
         </div>
         
-
-
-
+        <?php
+        }
+        if ($_SESSION["password_error"]==1) {
+        
+        ?>
+            <div id="error" class="alert alert-danger mostrar2" role="alert">
+            LA CONTRASEÑA ES ERRONEA, INTENTALO DE NUEVO
+        </div>
         <?php
         }
         ?>
