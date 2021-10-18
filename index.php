@@ -67,9 +67,36 @@ session_start();
         if ($_SESSION["password_error"]==1) {
         
         ?>
-            <div id="error" class="alert alert-danger mostrar2" role="alert">
+        <!--
+        <div id="error" class="alert alert-danger mostrar2" role="alert">
             LA CONTRASEÑA ES ERRONEA, INTENTALO DE NUEVO
         </div>
+        -->
+
+        <div class="modal1" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+            <div class="modal-header" style="text-align: center;">
+                <h4 class="modal-title">ERROR DE CONTRASEÑA</h4>
+                <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+            </div>
+
+            
+            <div class="modal-body" style="text-align: center;">
+                La contraseña es incorrecta, por favor introduzca de nuevo la contraseña
+            </div>
+
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="document.getElementById('myModal').style.display='none'">Close</button>
+            </div>
+
+            </div>
+            </div>
+        </div>
+        
+       
         <?php
         }
         ?>
@@ -151,7 +178,7 @@ session_start();
                 
     ?>
 
-    
+
 
     <div class="login-wrap">
         <div id="error" class="alert alert-danger ocultar" role="alert">
