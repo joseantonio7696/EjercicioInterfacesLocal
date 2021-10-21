@@ -40,10 +40,7 @@ session_start();
 
     <?php
 
-    
-    
- 
-    if (isset($_SESSION["correo" ])) {
+    if (isset($_SESSION["correo"])) {
                    
                 
     ?>
@@ -58,21 +55,34 @@ session_start();
         if ($_SESSION["correo_valido"]==1) {
         ?>
         
-        <div id="error" class="alert alert-danger mostrar2" role="alert">
-            EL CORREO INTRODUCIDO NO ESTA REGISTRADO, INTENTALO DE NUEVO
+        <div class="modal1" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+            <div class="modal-header" style="text-align: center;">
+                <h4 class="modal-title">ERROR DE CORREO</h4>
+            </div>
+
+            
+            <div class="modal-body" style="text-align: center;">
+                ERROR EN EL CORREO ELECTRONICO, INTENTALO DE NUEVO
+            </div>
+
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="document.getElementById('myModal').style.display='none'">Close</button>
+            </div>
+
+            </div>
+            </div>
         </div>
-        
+
         <?php
         }
         if ($_SESSION["password_error"]==1) {
         
         ?>
-        <!--
-        <div id="error" class="alert alert-danger mostrar2" role="alert">
-            LA CONTRASEÑA ES ERRONEA, INTENTALO DE NUEVO
-        </div>
-        -->
-
+        
         <div class="modal1" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -99,6 +109,32 @@ session_start();
        
         <?php
         }
+        if ($_SESSION["correoRegistrado"]==1) {
+        ?>
+        <div class="modal1" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+            <div class="modal-header" style="text-align: center;">
+                <h4 class="modal-title">ERROR</h4>
+                <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+            </div>
+
+            
+            <div class="modal-body" style="text-align: center;">
+                EL CORREO YA ESTA REGISTRADO, POR FAVOR INTENTALO DE NUEVO
+            </div>
+
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="document.getElementById('myModal').style.display='none'">Close</button>
+            </div>
+
+            </div>
+            </div>
+        </div>
+        <?php
+        }
         ?>
         <div class="login-html">
             <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Login</label>
@@ -112,7 +148,7 @@ session_start();
                     <form action="comprobarUsuario.php" method="POST" name="formulario" >
                     <div class="group">
                         <label for="user" class="label">Correo Electronico</label>
-                        <input id="user" name="correo" type="text" class="input" value= "<?php echo $_SESSION["correo"] ?> "  required >
+                        <input id="user" name="correo" type="text" class="input" value= "<?php echo $_SESSION["correo"]?>"  required >
                     </div>
                     <div class="group">
                         <label for="pass" class="label">Contraseña</label>
@@ -131,7 +167,7 @@ session_start();
                     <form action="altaClientes.php" method="POST" name="formularioRegist" onsubmit="return comprobarClave()">
                     <div class="group">
                         <label for="pass" class="label">Correo Electronico</label>
-                        <input id="pass" name="correo" type="email" class="input" value= "<?php echo $_SESSION['correo'] ?> " required>
+                        <input id="pass" name="correo" type="email" class="input" value= "<?php echo $_SESSION['correo']?>" required>
                     </div>
                     <div class="group">
                         <label for="pass" class="label">Contraseña</label>
@@ -146,17 +182,20 @@ session_start();
                     ?>
                     <div class="group">
                         <label for="fechaNacimiento" class="label">Fecha Nacimiento</label>
-                        <input id="pass" name="fechaNacimiento" type="date" class="input" value=" <?php echo $_SESSION['fecha_nacimiento'] ?>" required>
+                        <input id="pass" name="fechaNacimiento" type="date" class="input" value="<?php echo $_SESSION['fecha_nacimiento']?>" required>
                     </div>
                     
                     <?php 
-                    } 
+                    }else{ 
                         ?>
 
                     <div class="group">
                         <label for="fechaNacimiento" class="label">Fecha Nacimiento</label>
-                        <input id="pass" name="fechaNacimiento" type="date" class="input" value=" " required>
+                        <input id="pass" name="fechaNacimiento" type="date" class="input" required>
                     </div>
+                    <?php
+                    }
+                    ?>
                     <div class="group">
                         <input type="submit" class="button" value="Registrarse">
                     </div>

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,7 +87,7 @@ if ($detectarError==1) {
 }else {
   
   
-  $conexion = mysqli_connect("localhost", "root", "", "clientes") or
+  $conexion = mysqli_connect("localhost", "root", "", "usuarios") or
     die("Problemas con la conexion");
 
   $consulta = mysqli_query($conexion, "select Usuario_email
@@ -93,19 +96,16 @@ if ($detectarError==1) {
 
   if ($reg = mysqli_fetch_array($consulta)) {
     echo "EL CORREO ELECTRONICO YA ESTA REGISTRADO, VUELVA A INTENTARLO DE NUEVO";
-    
-    ?>
-    
-  <form action="index.php" method="POST">
-
-  <input  name="correo" value= <?php echo $correo ?> hidden>
-  <input  name="fechaNacimiento" value= <?php echo $fecha_nacimiento ?> hidden>
-  <input type="submit" class="button" value= "Enviar">
-
-  </form>
-    
-    <?php
-    
+    $_SESSION["correoRegistrado"]=1;
+    $_SESSION["correo"]=$correo;
+    $_SESSION["fecha_nacimiento"]=$fecha_nacimiento;
+    $_SESSION["correo_valido"]=0;
+    $_SESSION["password_error"]=0;
+    $url = "http://localhost/FORMULARIO%202%20LOCAL/index.php";
+      header("HTTP/1.1 301 Moved Permanently");
+      header("Location: ".$url);
+      exit(); 
+ 
   }else {
     
     mysqli_query($conexion, "insert into usuarios(Usuario_fecha_nacimiento,Usuario_email,Usuario_clave) values 
