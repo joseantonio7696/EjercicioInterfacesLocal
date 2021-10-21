@@ -7,7 +7,7 @@ if ( !is_null($_SESSION["correo"])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap 4 Website Example</title>
+  <title>MI PAGINA DE DISEÑO DE INTERFACES</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -29,26 +29,27 @@ if ( !is_null($_SESSION["correo"])) {
 </div>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">Inicio</a>
+  
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
+  
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Datos Personales</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      
-    </ul>
+    <a class="navbar-brand" href="http://localhost/FORMULARIO%202%20LOCAL/" >Inicio</a>
   </div> 
-  <a id="login" class="nav-link"><?php echo $_SESSION["correo"] ?></a>
-  <a id="login" class="nav-link" href="http://localhost/FORMULARIO%202%20LOCAL/" onclick=<?php session_destroy()  ?>>Login Out</a> 
+
+  <div id="login" class="dropdown">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    <?php echo $_SESSION["correo"] ?> 
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="hola">Editar Perfil</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="http://localhost/FORMULARIO%202%20LOCAL/" onclick=<?php session_destroy()?>>Login Out</a>
+    </div>
+  </div>
+</div>
+
 </nav>
 
 <div class="container" style="margin-top:30px">
@@ -103,6 +104,6 @@ if ( !is_null($_SESSION["correo"])) {
   $url = "http://localhost/FORMULARIO%202%20LOCAL/";
       header("HTTP/1.1 301 Moved Permanently");
       header("Location: ".$url);
-      exit(); 
+      exit();      
 } 
 ?>
