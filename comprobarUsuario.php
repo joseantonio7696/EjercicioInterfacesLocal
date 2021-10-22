@@ -78,8 +78,12 @@ if ($detectarError==1) {
     if (password_verify($contrasena,$claveComprobar)) {
         
       $_SESSION["correo"]=$reg['Usuario_email'];
+      $_SESSION["correo_valido"]=0;
+      $_SESSION["password_error"]=0;
+      $_SESSION["correoRegistrado"]=0;
+      $_SESSION["variableBandera"]=1;
       
-      $url = "paginaPrincipal.php";
+      $url = "login/";
       header("HTTP/1.1 301 Moved Permanently");
       header("Location: ".$url);
       exit(); 
@@ -94,7 +98,8 @@ if ($detectarError==1) {
       $_SESSION["correo_valido"]=0;
       $_SESSION["password_error"]=1;
       $_SESSION["correoRegistrado"]=0;
-      $url = "index.php";
+      $_SESSION["variableBandera"]=0;
+      $url = "./";
       header("HTTP/1.1 301 Moved Permanently");
       header("Location: ".$url);
       exit(); 
@@ -115,7 +120,8 @@ if ($detectarError==1) {
       $_SESSION["correo_valido"]=1;
       $_SESSION["password_error"]=0;
       $_SESSION["correoRegistrado"]=0;
-      $url = "index.php";
+      $_SESSION["variableBandera"]=0;
+      $url = "./";
       header("HTTP/1.1 301 Moved Permanently");
       header("Location: ".$url);
       exit(); 

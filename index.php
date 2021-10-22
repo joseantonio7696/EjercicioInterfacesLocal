@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +9,6 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="estilos.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -40,10 +38,14 @@ session_start();
 
     <?php
 
-    $_SESSION["correo"];
-
     if (isset($_SESSION["correo"])) {
-                   
+              
+        if ($_SESSION["variableBandera"]==1) {
+            $url = "login/";
+            header("HTTP/1.1 301 Moved Permanently");
+            header("Location: ".$url);
+            exit(); 
+        }
                 
     ?>
                 
@@ -165,7 +167,7 @@ session_start();
 
             
                 <div class="sign-up-htm" >
-                    <form action="altaClientes.php" method="POST" name="formularioRegist" onsubmit="return comprobarClave()">
+                    <form action="altaClientes/" method="POST" name="formularioRegist" onsubmit="return comprobarClave()">
                     <div class="group">
                         <label for="pass" class="label">Correo Electronico</label>
                         <input id="pass" name="correo" type="email" class="input" value= "<?php echo $_SESSION['correo']?>" required>
@@ -251,7 +253,7 @@ session_start();
 
             
                 <div class="sign-up-htm" >
-                    <form action="altaClientes.php" method="POST" name="formularioRegist" onsubmit="return comprobarClave()">
+                    <form action="altaClientes/" method="POST" name="formularioRegist" onsubmit="return comprobarClave()">
                     <div class="group">
                         <label for="pass" class="label">Correo Electronico</label>
                         <input id="pass" name="correo" type="email" class="input" required>

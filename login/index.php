@@ -1,6 +1,5 @@
 <?php
 session_start();
-print_r($_SESSION);
 if ( !is_null($_SESSION["correo"])) {
 
 ?>
@@ -36,7 +35,7 @@ if ( !is_null($_SESSION["correo"])) {
   </button>
   
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <a class="navbar-brand" href="paginaPrincipal.php" >Inicio</a>
+    <a class="navbar-brand" href="./" >Inicio</a>
   </div> 
 
   <div id="login" class="dropdown">
@@ -46,7 +45,7 @@ if ( !is_null($_SESSION["correo"])) {
     <div class="dropdown-menu">
       <a class="dropdown-item" href="hola">Editar Perfil</a>
       <div class="dropdown-divider"></div>
-      <!--<a class="dropdown-item" href="http://localhost/FORMULARIO%202%20LOCAL/" onclick=<?php session_destroy()?>>Login Out</a>-->
+      <a class="dropdown-item" href="borrado.php"  >Login Out</a>
     </div>
   </div>
 </div>
@@ -103,7 +102,7 @@ if ( !is_null($_SESSION["correo"])) {
 <?php
 }else {
   
-  $url = "index.php";
+      $url = "../";
       header("HTTP/1.1 301 Moved Permanently");
       header("Location: ".$url);
       exit(); 

@@ -101,7 +101,7 @@ if ($detectarError==1) {
     $_SESSION["fecha_nacimiento"]=$fecha_nacimiento;
     $_SESSION["correo_valido"]=0;
     $_SESSION["password_error"]=0;
-    $url = "http://localhost/FORMULARIO%202%20LOCAL/index.php";
+    $url = "../";
       header("HTTP/1.1 301 Moved Permanently");
       header("Location: ".$url);
       exit(); 
