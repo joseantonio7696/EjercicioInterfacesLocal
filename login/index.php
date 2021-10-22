@@ -43,7 +43,7 @@ if ( !is_null($_SESSION["correo"])) {
     <?php echo $_SESSION["correo"] ?> 
     </button>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="hola">Editar Perfil</a>
+      <a class="dropdown-item" href="modificarPerfil/">Editar Perfil</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="borrado.php"  >Login Out</a>
     </div>
