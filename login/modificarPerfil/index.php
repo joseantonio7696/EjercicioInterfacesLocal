@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+echo $_SESSION["Usuario_fotografia"];
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +37,7 @@ session_start();
     <?php echo $_SESSION["correo"] ?> 
     </button>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="hola">Editar Perfil</a>
+      <a class="dropdown-item" href="./buscarDetalles.php">Editar Perfil</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="../borrado.php"  >Login Out</a>
     </div>
@@ -46,33 +46,41 @@ session_start();
 </nav>
 
 <div class="container" style="width: 50%;">
-<form>
+<form action="">
+  <?php
   
+  if (is_null($_SESSION["Usuario_fotografia"])) {
+  ?>
   <div class="img-user">
-  <input type="image" class="imgRedonda" src="imagenes/1.jpg" >
+    <img class="imgRedonda" src="imagenes/login.png">
   </div>
+  <?php
+  }else {
+  ?>
+  <div class="img-user">
+    <img class="imgRedonda" src="<?php echo $_SESSION['Usuario_fotografia']?>">
+  </div>
+  <?php
+  }
+  ?>
   <label for="nombre" class="form-label">Nombre</label>
-  <input name="nombre" type="text" class="form-control" ></input>
+  <input name="nombre" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_nombre']?>" ></input>
   <label for="apellido1" class="form-label">Apellido 1</label>
-  <input name="apellido1" type="text" class="form-control" ></input>
+  <input name="apellido1" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_apellido1']?>" ></input>
   <label for="apellido2" class="form-label">Apellido 2</label>
-  <input name="apellido2" type="text" class="form-control" ></input>
-  <label for="contrasena" class="form-label">Contraseña</label>
-  <input name="contrasena" type="text" class="form-control" ></input>
+  <input name="apellido2" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_apellido2']?>" ></input>
   <label for="correo" class="form-label">Correo Electronico</label>
-  <input name="correo" type="text" class="form-control" ></input>
+  <input name="correo" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_email']?>" ></input>
   <label for="domicilio" class="form-label">Domicilio</label>
-  <input name="domicilio" type="text" class="form-control" ></input>
+  <input name="domicilio" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_domicilio']?>" ></input>
   <label for="poblacion" class="form-label">Poblacion</label>
-  <input name="poblacion" type="text" class="form-control" ></input>
+  <input name="poblacion" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_poblacion']?>" ></input>
   <label for="provincia" class="form-label">Provincia</label>
-  <input name="provincia" type="text" class="form-control" ></input>
-  <label for="perfil" class="form-label">Perfil</label>
-  <input name="perfil" type="text" class="form-control" ></input>
+  <input name="provincia" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_provincia']?>" ></input>
   <label for="dni" class="form-label">DNI</label>
-  <input name="dni" type="text" class="form-control" ></input>
+  <input name="dni" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_dni']?>" ></input>
   <label for="numeroTelefono" class="form-label">Numero de Telefono</label>
-  <input name="numeroTelefono" type="text" class="form-control" ></input>
+  <input name="numeroTelefono" type="number" class="form-control" value="<?php echo $_SESSION['Usuario_numeroTelefono']?>" ></input>
   <label for="foto" class="form-label">Fotografia</label><br>
   <input name="foto" type="file" ></input>
 
