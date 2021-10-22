@@ -79,7 +79,7 @@ if ($detectarError==1) {
         
       $_SESSION["correo"]=$reg['Usuario_email'];
       
-      $url = "http://localhost/FORMULARIO%202%20LOCAL/paginaPrincipal.php";
+      $url = "paginaPrincipal.php";
       header("HTTP/1.1 301 Moved Permanently");
       header("Location: ".$url);
       exit(); 
@@ -93,7 +93,8 @@ if ($detectarError==1) {
       $_SESSION["correo"]=$reg['Usuario_email'];
       $_SESSION["correo_valido"]=0;
       $_SESSION["password_error"]=1;
-      $url = "http://localhost/FORMULARIO%202%20LOCAL/index.php";
+      $_SESSION["correoRegistrado"]=0;
+      $url = "index.php";
       header("HTTP/1.1 301 Moved Permanently");
       header("Location: ".$url);
       exit(); 
@@ -113,7 +114,8 @@ if ($detectarError==1) {
       $_SESSION["correo"]=$correo;
       $_SESSION["correo_valido"]=1;
       $_SESSION["password_error"]=0;
-      $url = "http://localhost/FORMULARIO%202%20LOCAL/index.php";
+      $_SESSION["correoRegistrado"]=0;
+      $url = "index.php";
       header("HTTP/1.1 301 Moved Permanently");
       header("Location: ".$url);
       exit(); 

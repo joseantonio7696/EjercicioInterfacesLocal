@@ -40,6 +40,8 @@ session_start();
 
     <?php
 
+    $_SESSION["correo"];
+
     if (isset($_SESSION["correo"])) {
                    
                 
@@ -117,7 +119,6 @@ session_start();
             
             <div class="modal-header" style="text-align: center;">
                 <h4 class="modal-title">ERROR</h4>
-                <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
             </div>
 
             
@@ -210,9 +211,8 @@ session_start();
     
 
     <?php
-    session_destroy();
+    //session_destroy();
     
-
             }else {
                 
     ?>
