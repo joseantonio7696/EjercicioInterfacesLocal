@@ -8,6 +8,7 @@ session_start();
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REGISTRO DE CLIENTES</title>
+    <link href="estilos.css" rel="stylesheet">
 </head>
 <body>
 
@@ -101,6 +102,7 @@ if ($detectarError==1) {
     $_SESSION["fecha_nacimiento"]=$fecha_nacimiento;
     $_SESSION["correo_valido"]=0;
     $_SESSION["password_error"]=0;
+    $_SESSION["registrado"]=0;
     $url = "../";
       header("HTTP/1.1 301 Moved Permanently");
       header("Location: ".$url);
@@ -116,12 +118,16 @@ if ($detectarError==1) {
 
   echo "El cliente fue dado de alta.";
   
+  
    $to      = $correo;
    $subject = "Correo de Bienvenida";
    $message = "Bienvenido a la primera pagina de diseño de interfaces de Jose Antonio Marquez, va a ser usted hackeado hasta las trancas";
-   $headers = "From: admin@joseantoniomarquez.me";
 
-   mail($to,$subject,$message,$headers);
+   mail($to,$subject,$message);
+    $_SESSION["correoRegistrado"]=0;
+      $url = "../";
+      header("HTTP/1.1 301 Moved Permanently");
+      header("Location: ".$url);
 
 }
   
@@ -129,10 +135,6 @@ if ($detectarError==1) {
 
   ?>
 
-
-
-  
-
-   
+ 
 </body>
 </html>

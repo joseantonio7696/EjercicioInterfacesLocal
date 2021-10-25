@@ -31,8 +31,8 @@ die("Problemas en el select:" . mysqli_error($conexion));
     $_SESSION["Usuario_poblacion"]=$reg['Usuario_poblacion'];
     $_SESSION["Usuario_provincia"]=$reg['Usuario_provincia'];
     $_SESSION["Usuario_dni"]=$reg['Usuario_nif'];
-    $_SESSION["Usuario_fotografia"]=$reg['Usuario_fotografia'];
     $_SESSION["Usuario_numeroTelefono"]=$reg['Usuario_numero_telefono'];
+    $_SESSION["Usuario_fotografia"]=$reg['Usuario_fotografia'];
     
     $url = "./";
     header("HTTP/1.1 301 Moved Permanently");

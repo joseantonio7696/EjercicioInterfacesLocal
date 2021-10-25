@@ -1,6 +1,5 @@
 <?php
 session_start();
-echo $_SESSION["Usuario_fotografia"];
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +45,7 @@ echo $_SESSION["Usuario_fotografia"];
 </nav>
 
 <div class="container" style="width: 50%;">
-<form action="">
+<form action="actualizarDatos.php" method="POST">
   <?php
   
   if (is_null($_SESSION["Usuario_fotografia"])) {
@@ -64,26 +63,24 @@ echo $_SESSION["Usuario_fotografia"];
   }
   ?>
   <label for="nombre" class="form-label">Nombre</label>
-  <input name="nombre" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_nombre']?>" ></input>
+  <input name="nombre" type="text" class="form-control" pattern="[A-Z ]{2,254}" value="<?php echo $_SESSION['Usuario_nombre']?>" ></input>
   <label for="apellido1" class="form-label">Apellido 1</label>
-  <input name="apellido1" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_apellido1']?>" ></input>
+  <input name="apellido1" type="text" class="form-control" pattern="[A-Z ]{2,254}" value="<?php echo $_SESSION['Usuario_apellido1']?>" ></input>
   <label for="apellido2" class="form-label">Apellido 2</label>
-  <input name="apellido2" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_apellido2']?>" ></input>
+  <input name="apellido2" type="text" class="form-control" pattern="[A-Z ]{2,254}" value="<?php echo $_SESSION['Usuario_apellido2']?>" ></input>
   <label for="correo" class="form-label">Correo Electronico</label>
-  <input name="correo" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_email']?>" ></input>
+  <input name="correo" type="email" class="form-control" value="<?php echo $_SESSION['Usuario_email']?>" ></input>
   <label for="domicilio" class="form-label">Domicilio</label>
-  <input name="domicilio" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_domicilio']?>" ></input>
+  <input name="domicilio" type="text" class="form-control" pattern="[A-Z ]{2,254}" value="<?php echo $_SESSION['Usuario_domicilio']?>" ></input>
   <label for="poblacion" class="form-label">Poblacion</label>
-  <input name="poblacion" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_poblacion']?>" ></input>
+  <input name="poblacion" type="text" class="form-control" pattern="[A-Z ]{2,254}" value="<?php echo $_SESSION['Usuario_poblacion']?>" ></input>
   <label for="provincia" class="form-label">Provincia</label>
-  <input name="provincia" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_provincia']?>" ></input>
+  <input name="provincia" type="text" class="form-control" pattern="[A-Z ]{2,254}" value="<?php echo $_SESSION['Usuario_provincia']?>" ></input>
   <label for="dni" class="form-label">DNI</label>
   <input name="dni" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_dni']?>" ></input>
   <label for="numeroTelefono" class="form-label">Numero de Telefono</label>
   <input name="numeroTelefono" type="number" class="form-control" value="<?php echo $_SESSION['Usuario_numeroTelefono']?>" ></input>
-  <label for="foto" class="form-label">Fotografia</label><br>
-  <input name="foto" type="file" ></input>
-
+  <input type="submit" value="Guardar Datos">
 </form>
 </div>
 

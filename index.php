@@ -93,7 +93,7 @@ session_start();
             
             <div class="modal-header" style="text-align: center;">
                 <h4 class="modal-title">ERROR DE CONTRASEÑA</h4>
-                <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                
             </div>
 
             
@@ -219,6 +219,42 @@ session_start();
                 
     ?>
 
+<?php
+        
+        if (isset($_SESSION["correoRegistrado"])) {
+
+            if ($_SESSION["correoRegistrado"]==0) {
+                
+            
+        ?>
+        
+        <div class="modal1" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+            <div class="modal-header" style="text-align: center;">
+                <h4 class="modal-title">CORREO REGISTRADO</h4>
+            </div>
+
+            
+            <div class="modal-body" style="text-align: center;">
+                SE HA REGISTRADO CORRECTAMENTE, GRACIAS
+            </div>
+
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="document.getElementById('myModal').style.display='none'">Close</button>
+            </div>
+
+            </div>
+            </div>
+        </div>
+
+        <?php
+        }
+        }
+
+        ?>
 
 
     <div class="login-wrap">
