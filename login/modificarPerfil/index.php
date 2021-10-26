@@ -14,6 +14,21 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>EDITAR PERFIL</title>
+    <script>
+        function comprobarClave(){
+            let comprobado=true;
+           clave1 = document.formularioRegist.contrasena.value;
+           clave2 = document.formularioRegist.contrasenaRep.value;
+        
+            if (clave1 != clave2){
+              document.getElementById("error").classList.add("mostrar");
+              comprobado=false;
+              
+            }
+
+               return comprobado;
+            }
+      </script>
 </head>
 <body>
 <div class="jumbotron text-center" style="margin-bottom:0">
@@ -82,6 +97,19 @@ session_start();
   <input name="numeroTelefono" type="number" class="form-control" value="<?php echo $_SESSION['Usuario_numeroTelefono']?>" ></input>
   <input type="submit" value="Guardar Datos">
 </form>
+<hr>
+<h2>Cambiar Contraseña</h2>
+<form action="actualizarContrasena.php" onsubmit="return comprobarClave()">
+  <label for="contrasena" class="form-label">Contraseña actual</label>
+  <input type="password" class="form-control" name="contrasena"/>
+  <label for="nuevaContrasena" class="form-label">Nueva contraseña</label>
+  <input type="password" class="form-control" name="nuevaContrasena"/>
+  <label for="nuevaContrasena2" class="form-label">Repita la contrasena</label>
+  <input type="password" class="form-control" name="nuevaContrasena2"/>
+</form>
+
+
+
 </div>
 
 <div class="jumbotron text-center" style="margin-bottom:0; margin-top: 80px; height: 10px">
