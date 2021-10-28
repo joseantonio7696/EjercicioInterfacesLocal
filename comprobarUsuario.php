@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,8 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = test_input($_POST["correo"]);
    
   }
-
-  
 
   if (empty($_POST["contrasena"])) {
     $contrasenaErr = "Contraseña es requerida";
@@ -67,10 +64,6 @@ if ($detectarError==1) {
                         from usuarios where Usuario_email='$correo'") or
     die("Problemas en el select:" . mysqli_error($conexion));
 
-
-
-
-
   if ($reg = mysqli_fetch_array($consulta)) {
     
     $claveComprobar=$reg['Usuario_clave'];
@@ -87,10 +80,6 @@ if ($detectarError==1) {
       header("HTTP/1.1 301 Moved Permanently");
       header("Location: ".$url);
       exit(); 
-      
-
-   
-
 
     }else{
 
@@ -106,9 +95,7 @@ if ($detectarError==1) {
       
 
         ?>
-    
-    
-     
+
     <?php
 
     }
@@ -141,10 +128,5 @@ mysqli_close($conexion);
 
 ?>
 
-
-
-
-
- 
 </body>
 </html>

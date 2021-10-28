@@ -17,8 +17,8 @@ session_start();
     <script>
         function comprobarClave(){
             let comprobado=true;
-           clave1 = document.formularioRegist.contrasena.value;
-           clave2 = document.formularioRegist.contrasenaRep.value;
+           clave1 = document.formuContrasena.nuevaContrasena.value;
+           clave2 = document.formuContrasena.nuevaContrasenaRep.value;
         
             if (clave1 != clave2){
               document.getElementById("error").classList.add("mostrar");
@@ -99,13 +99,14 @@ session_start();
 </form>
 <hr>
 <h2>Cambiar Contraseña</h2>
-<form action="actualizarContrasena.php" onsubmit="return comprobarClave()">
+<form name="formuContrasena" action="actualizarContrasena.php" onsubmit="return comprobarClave()" method="POST">
   <label for="contrasena" class="form-label">Contraseña actual</label>
   <input type="password" class="form-control" name="contrasena"/>
   <label for="nuevaContrasena" class="form-label">Nueva contraseña</label>
   <input type="password" class="form-control" name="nuevaContrasena"/>
-  <label for="nuevaContrasena2" class="form-label">Repita la contrasena</label>
-  <input type="password" class="form-control" name="nuevaContrasena2"/>
+  <label for="nuevaContrasenaRep" class="form-label">Repita la contrasena</label>
+  <input type="password" class="form-control" name="nuevaContrasenaRep"/>
+  <input type="submit" value="Cambiar Contraseña">
 </form>
 
 
