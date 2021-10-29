@@ -72,7 +72,7 @@ session_start();
   }else {
   ?>
   <div class="img-user">
-    <img class="imgRedonda" src="<?php echo $_SESSION['Usuario_fotografia']?>">
+    <img class="imgRedonda" src="./imagenes/<?php echo $_SESSION['Usuario_fotografia']?>">
   </div>
   <?php
   }
@@ -95,7 +95,7 @@ session_start();
   <input name="dni" type="text" class="form-control" value="<?php echo $_SESSION['Usuario_dni']?>" ></input>
   <label for="numeroTelefono" class="form-label">Numero de Telefono</label>
   <input name="numeroTelefono" type="number" class="form-control" value="<?php echo $_SESSION['Usuario_numeroTelefono']?>" ></input>
-  <input type="submit" value="Guardar Datos">
+  <input style="margin-top: 15px; margin-left: 40%;" type="submit" value="Guardar Datos">
 </form>
 <hr>
 <h2>Cambiar Contraseña</h2>
@@ -106,7 +106,14 @@ session_start();
   <input type="password" class="form-control" name="nuevaContrasena"/>
   <label for="nuevaContrasenaRep" class="form-label">Repita la contrasena</label>
   <input type="password" class="form-control" name="nuevaContrasenaRep"/>
-  <input type="submit" value="Cambiar Contraseña">
+  <input style="margin-top: 15px; margin-left: 40%;" type="submit" value="Cambiar Contraseña">
+</form>
+<hr>
+<h2>Cambiar Imagen de Perfil</h2>
+<form  action="actualizarFotografia.php" method="POST" enctype="multipart/form-data">
+  <label for="fotografia" class="form-label">Fotografia</label>
+  <input type="file" class="form-control" name="fotografia"/>
+  <input style="margin-top: 15px; margin-left: 40%;" type="submit" value="Subir Imagen">
 </form>
 
 
