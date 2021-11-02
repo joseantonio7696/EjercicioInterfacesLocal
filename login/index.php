@@ -46,7 +46,7 @@ if ( !is_null($_SESSION["correo"])) {
     <div class="dropdown-menu">
       <a class="dropdown-item" href="modificarPerfil/buscarDetalles.php">Editar Perfil</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="borrado.php"  >Login Out</a>
+      <a class="dropdown-item" href="borrado.php">Login Out</a>
     </div>
   </div>
 </div>
@@ -58,7 +58,19 @@ if ( !is_null($_SESSION["correo"])) {
     <div class="col-sm-4">
       <h2>Sobre Ti:</h2>
       <h5>Tu foto:</h5>
-      <div class="fakeimg"><img class="fakeimg" src="./modificarPerfil/imagenes/<?php echo $_SESSION['Usuario_fotografia']?>"/></div>     
+      <?php
+
+      if (isset($_SESSION["Usuario_fotografia"])) {
+    
+      ?>
+      <div class="fakeimg"><img class="fakeimg" src="./modificarPerfil/imagenes/<?php echo $_SESSION['Usuario_fotografia']?>"/></div> 
+      <?php
+      } else {
+      ?> 
+        <div class="fakeimg"><img class="fakeimg" src="./modificarPerfil/imagenes/login.png"/></div>
+      <?php
+      }
+      ?>
     </div>
   </div>
 </div>
