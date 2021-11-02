@@ -72,10 +72,12 @@ if ($detectarError==1) {
         
       $_SESSION["correo"]=$reg['Usuario_email'];
       $_SESSION["id"]=$reg['Usuario_id'];
+      $_SESSION["fotografia"]=$reg["Usuario_fotografia"];
       $_SESSION["correo_valido"]=0;
       $_SESSION["password_error"]=0;
       $_SESSION["correoRegistrado"]=0;
       $_SESSION["variableBandera"]=1;
+      
       
       $url = "login/";
       header("HTTP/1.1 301 Moved Permanently");
