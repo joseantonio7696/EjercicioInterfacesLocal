@@ -57,6 +57,7 @@ session_start();
         <?php
         
         if ($_SESSION["correo_valido"]==1) {
+            $_SESSION["correo_valido"]==0;
         ?>
         
         <div class="modal1" id="myModal">
@@ -84,7 +85,7 @@ session_start();
         <?php
         }
         if ($_SESSION["password_error"]==1) {
-        
+            $_SESSION["password_error"]==0;
         ?>
         
         <div class="modal1" id="myModal">
@@ -114,6 +115,7 @@ session_start();
         <?php
         }
         if ($_SESSION["correoRegistrado"]==1) {
+            $_SESSION["correoRegistrado"]==0;
         ?>
         <div class="modal1" id="myModal">
         <div class="modal-dialog">
@@ -213,7 +215,7 @@ session_start();
     
 
     <?php
-    //session_destroy();
+    
     
             }else {
                 

@@ -60,7 +60,7 @@ if ($detectarError==1) {
   $conexion = mysqli_connect("localhost", "root", "", "usuarios") or
     die("Problemas con la conexion");
 
-  $consulta = mysqli_query($conexion, "select Usuario_email,Usuario_clave,Usuario_id,Usuario_fotografia
+  $consulta = mysqli_query($conexion, "select Usuario_email,Usuario_clave,Usuario_id,Usuario_fotografia,Usuario_perfil
                         from usuarios where Usuario_email='$correo'") or
     die("Problemas en el select:" . mysqli_error($conexion));
 
@@ -73,16 +73,29 @@ if ($detectarError==1) {
       $_SESSION["correo"]=$reg['Usuario_email'];
       $_SESSION["id"]=$reg['Usuario_id'];
       $_SESSION["Usuario_fotografia"]=$reg["Usuario_fotografia"];
+      $_SESSION["Usuario_perfil"]=$reg["Usuario_perfil"];
       $_SESSION["correo_valido"]=0;
       $_SESSION["password_error"]=0;
       $_SESSION["correoRegistrado"]=0;
       $_SESSION["variableBandera"]=1;
       
       
-      $url = "login/";
+      if ($_SESSION["Usuario_perfil"]=="ADMINISTRADOR") {
+       
+        $url = "login/administrador/";
       header("HTTP/1.1 301 Moved Permanently");
       header("Location: ".$url);
       exit(); 
+
+      } else {
+       
+        $url = "login/cliente/";
+      header("HTTP/1.1 301 Moved Permanently");
+      header("Location: ".$url);
+      exit(); 
+      }
+      
+      
 
     }else{
 
