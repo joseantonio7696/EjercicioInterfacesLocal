@@ -17,7 +17,7 @@ $correo=$_SESSION["correo"];
   $conexion = mysqli_connect("localhost", "root", "", "usuarios") or
     die("Problemas con la conexión");
 
-$consulta = mysqli_query($conexion, "select Usuario_email,Usuario_nombre,Usuario_apellido1,Usuario_apellido2,Usuario_domicilio,Usuario_poblacion,Usuario_provincia,Usuario_nif,Usuario_fotografia,Usuario_numero_telefono
+$consulta = mysqli_query($conexion, "select Usuario_email,Usuario_nombre,Usuario_apellido1,Usuario_apellido2,Usuario_domicilio,Usuario_poblacion,Usuario_provincia,Usuario_nif,Usuario_fotografia,Usuario_numero_telefono,Usuario_perfil
     from usuarios where Usuario_email='$correo'") or
 die("Problemas en el select:" . mysqli_error($conexion));
 
@@ -33,6 +33,7 @@ die("Problemas en el select:" . mysqli_error($conexion));
     $_SESSION["Usuario_dni"]=$reg['Usuario_nif'];
     $_SESSION["Usuario_numeroTelefono"]=$reg['Usuario_numero_telefono'];
     $_SESSION["Usuario_fotografia"]=$reg['Usuario_fotografia'];
+    $_SESSION["Usuario_perfil"]=$reg['Usuario_perfil'];
     
     $url = "./";
     header("HTTP/1.1 301 Moved Permanently");

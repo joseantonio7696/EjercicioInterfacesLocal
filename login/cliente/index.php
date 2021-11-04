@@ -35,18 +35,31 @@ if ( !is_null($_SESSION["correo"])) {
     <span class="navbar-toggler-icon"></span>
   </button>
   
+  <?php
+
+if ($_SESSION["Usuario_perfil"]=="ADMINISTRADOR") {
+  ?>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <a class="navbar-brand" href="./" >Inicio</a>
-  </div> 
+  <a class="navbar-brand" href="../administrador/" >Inicio</a>
+</div> 
+<?php
+} else {
+  ?>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+  <a class="navbar-brand" href="../cliente/" >Inicio</a>
+</div> 
+<?php
+}
+?>
 
   <div id="login" class="dropdown">
     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
     <?php echo $_SESSION["correo"] ?> 
     </button>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="modificarPerfil/buscarDetalles.php">Editar Perfil</a>
+      <a class="dropdown-item" href="../modificarPerfil/buscarDetalles.php">Editar Perfil</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="borrado.php">Login Out</a>
+      <a class="dropdown-item" href="../borrado.php">Login Out</a>
     </div>
   </div>
 </div>
@@ -63,7 +76,7 @@ if ( !is_null($_SESSION["correo"])) {
       if (isset($_SESSION["Usuario_fotografia"])) {
     
       ?>
-      <div class="fakeimg"><img class="fakeimg" src="./modificarPerfil/imagenes/<?php echo $_SESSION['Usuario_fotografia']?>"/></div> 
+      <div class="fakeimg"><img class="fakeimg" src="../modificarPerfil/imagenes/<?php echo $_SESSION['Usuario_fotografia']?>"/></div> 
       <?php
       } else {
       ?> 
@@ -85,7 +98,7 @@ if ( !is_null($_SESSION["correo"])) {
 <?php
 }else {
   
-      $url = "../";
+      $url = "../../";
       header("HTTP/1.1 301 Moved Permanently");
       header("Location: ".$url);
       exit(); 

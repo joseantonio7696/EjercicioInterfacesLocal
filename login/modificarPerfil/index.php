@@ -42,9 +42,23 @@ session_start();
     <span class="navbar-toggler-icon"></span>
   </button>
   
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <a class="navbar-brand" href="../" >Inicio</a>
+  <?php
+
+  if ($_SESSION["Usuario_perfil"]=="ADMINISTRADOR") {
+    ?>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <a class="navbar-brand" href="../administrador/" >Inicio</a>
   </div> 
+  <?php
+  } else {
+    ?>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <a class="navbar-brand" href="../cliente/" >Inicio</a>
+  </div> 
+  <?php
+  }
+  
+  ?>
 
   <div id="login" class="dropdown">
     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">

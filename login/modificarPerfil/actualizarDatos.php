@@ -34,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       exit(); 
     }else {
         echo "ERROR EN LA CONEXION";
-        /*, Usuario_nombre='$_REQUEST[nombre]', Usuario_apellido1='$_REQUEST[apellido1]', Usuario_apellido2='$_REQUEST[apellido2]', Usuario_domicilio='$_REQUEST[domicilio]', Usuario_poblacion='$_REQUEST[poblacion]', Usuario_numero_telefono='$_REQUEST[numeroTelefono]', Usuario_nif='$_REQUEST[dni]',Usuario_provincia='$_REQUEST[provincia]',*/
     }
     ?>
 </body>
