@@ -83,6 +83,8 @@ if ($detectarError==1) {
       if ($_SESSION["Usuario_perfil"]=="ADMINISTRADOR") {
        
         $_SESSION["usuarioRegistrado"]=0;
+        $_SESSION["idRegistrado"]=0;
+        $_SESSION["idBorrado"]=0;
         $url = "login/administrador/";
       header("HTTP/1.1 301 Moved Permanently");
       header("Location: ".$url);
