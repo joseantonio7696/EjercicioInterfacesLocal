@@ -96,7 +96,6 @@ if ($detectarError==1) {
     die("Problemas en el select:" . mysqli_error($conexion));
 
   if ($reg = mysqli_fetch_array($consulta)) {
-    echo "EL CORREO ELECTRONICO YA ESTA REGISTRADO, VUELVA A INTENTARLO DE NUEVO";
     $_SESSION["correoRegistrado"]=1;
     $_SESSION["correo"]=$correo;
     $_SESSION["fecha_nacimiento"]=$fecha_nacimiento;
@@ -110,14 +109,11 @@ if ($detectarError==1) {
  
   }else {
     
-    mysqli_query($conexion, "insert into usuarios(Usuario_fecha_nacimiento,Usuario_email,Usuario_clave) values 
-                       ('$fecha_nacimiento','$correo','$contrasenaHash')")
+    mysqli_query($conexion, "insert into usuarios(Usuario_fecha_nacimiento,Usuario_email,Usuario_clave,Usuario_perfil) values 
+                       ('$fecha_nacimiento','$correo','$contrasenaHash','CLIENTE')")
     or die("Problemas en el select " . mysqli_error($conexion));
 
   mysqli_close($conexion);
-
-  echo "El cliente fue dado de alta.";
-  
   
    $to      = $correo;
    $subject = "Correo de Bienvenida";
