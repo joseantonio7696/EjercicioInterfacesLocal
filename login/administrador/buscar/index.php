@@ -34,6 +34,17 @@ session_start();
     ?>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <a class="navbar-brand" href="../../administrador/" >Inicio</a>
+  
+  <div class="dropdown">
+  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+    Opciones de Administrador
+  </button>
+<div class="dropdown-menu">
+      <a class="dropdown-item" href="../agregar/">Agregar Usuario</a>
+      <a class="dropdown-item" href="../borrar/">Borrar Usuario</a>
+      <a class="dropdown-item" href="../buscar/">Buscar Usuario</a>
+</div>
+</div>
   </div> 
   <?php
   } else {

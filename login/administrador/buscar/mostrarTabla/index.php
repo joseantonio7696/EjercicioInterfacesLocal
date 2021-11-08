@@ -77,13 +77,24 @@ $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LI
   if ($_SESSION["Usuario_perfil"]=="ADMINISTRADOR") {
     ?>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <a class="navbar-brand" href="../../administrador/" >Inicio</a>
-  </div> 
+    <a class="navbar-brand" href="../../../administrador/" >Inicio</a>
+  
+  <div class="dropdown">
+  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+    Opciones de Administrador
+  </button>
+<div class="dropdown-menu">
+      <a class="dropdown-item" href="../../agregar/">Agregar Usuario</a>
+      <a class="dropdown-item" href="../../borrar/">Borrar Usuario</a>
+      <a class="dropdown-item" href="../../buscar/">Buscar Usuario</a>
+</div>
+</div>
+  </div>
   <?php
   } else {
     ?>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <a class="navbar-brand" href="../../cliente/" >Inicio</a>
+    <a class="navbar-brand" href="../../../cliente/" >Inicio</a>
   </div> 
   <?php
   }
@@ -95,9 +106,9 @@ $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LI
     <?php echo $_SESSION["correo"] ?> 
     </button>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="./buscarDetalles.php">Editar Perfil</a>
+      <a class="dropdown-item" href="../../../modificarPerfil/buscarDetalles.php">Editar Perfil</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="../../borrado.php"  >Login Out</a>
+      <a class="dropdown-item" href="../../../borrado.php"  >Login Out</a>
     </div>
   </div>
 </div>
