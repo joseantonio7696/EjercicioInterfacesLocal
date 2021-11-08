@@ -46,9 +46,9 @@ if ($_SESSION["Usuario_perfil"]=="ADMINISTRADOR") {
     Opciones de Administrador
   </button>
 <div class="dropdown-menu">
-      <a class="dropdown-item" href="">Agregar Usuario</a>
-      <a class="dropdown-item" href="">Borrar Usuario</a>
-      <a class="dropdown-item" href="">Buscar Usuario</a>
+      <a class="dropdown-item" href="./agregar/">Agregar Usuario</a>
+      <a class="dropdown-item" href="./borrar/">Borrar Usuario</a>
+      <a class="dropdown-item" href="./buscar/">Buscar Usuario</a>
 </div>
 </div>
   </div>
