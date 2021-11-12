@@ -32,7 +32,8 @@ session_start();
     } else {
 
         if ($_SESSION["Usuario_bloqueado"]==0) {
-            $consulta = mysqli_query($conexion, "UPDATE usuarios SET Usuario_bloqueado='1' WHERE Usuario_email= '$correo'") or
+            $fechaActual = date('Y-m-d');
+            $consulta = mysqli_query($conexion, "UPDATE usuarios SET Usuario_bloqueado='1', Usuario_fecha_bloqueo='$fechaActual' WHERE Usuario_email= '$correo'") or
         die("Problemas en el select:" . mysqli_error($conexion));
         $_SESSION["Usuario_numero_intentos"]=0;
         $_SESSION["Usuario_bloqueado"]=1;
