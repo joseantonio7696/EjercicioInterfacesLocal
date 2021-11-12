@@ -55,8 +55,32 @@ session_start();
         </div>
 
         <?php
-        
-        if ($_SESSION["correo_valido"]==1) {
+
+        if ($_SESSION["Usuario_bloqueado"]==1) {
+            ?>
+            <div class="modal1" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                
+                <div class="modal-header" style="text-align: center;">
+                    <h4 class="modal-title">USUARIO BLOQUEADO</h4>
+                </div>
+    
+                
+                <div class="modal-body" style="text-align: center;">
+                    EL CORREO ESTA BLOQUEADO, CONTACTE CON EL ADMINISTRADOR PARA SU DESBLOQUEO
+                </div>
+    
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="document.getElementById('myModal').style.display='none'">Close</button>
+                </div>
+    
+                </div>
+                </div>
+            </div>
+        <?php
+        }else if ($_SESSION["correo_valido"]==1) {
             $_SESSION["correo_valido"]==0;
         ?>
         
@@ -83,7 +107,7 @@ session_start();
         </div>
 
         <?php
-        }
+        }else
         if ($_SESSION["password_error"]==1) {
             $_SESSION["password_error"]==0;
         ?>
@@ -113,7 +137,7 @@ session_start();
         
        
         <?php
-        }
+        }else
         if ($_SESSION["correoRegistrado"]==1) {
             $_SESSION["correoRegistrado"]==0;
         ?>
@@ -141,6 +165,7 @@ session_start();
         <?php
         }
         ?>
+        
         <div class="login-html">
             <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Login</label>
             <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Registrarse</label>

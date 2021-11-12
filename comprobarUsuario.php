@@ -60,13 +60,33 @@ if ($detectarError==1) {
   $conexion = mysqli_connect("localhost", "root", "", "usuarios") or
     die("Problemas con la conexion");
 
-  $consulta = mysqli_query($conexion, "select Usuario_email,Usuario_clave,Usuario_id,Usuario_fotografia,Usuario_perfil
+  $consulta = mysqli_query($conexion, "select *
                         from usuarios where Usuario_email='$correo'") or
     die("Problemas en el select:" . mysqli_error($conexion));
 
   if ($reg = mysqli_fetch_array($consulta)) {
     
     $claveComprobar=$reg['Usuario_clave'];
+
+    $_SESSION["Usuario_bloqueado"]=$reg["Usuario_bloqueado"];
+    $_SESSION["Usuario_fecha_bloqueo"]=$reg["Usuario_fecha_bloqueo"];
+    $_SESSION["Usuario_numero_intentos"]=$reg["Usuario_numero_intentos"];
+    
+    if ($_SESSION["Usuario_bloqueado"]!=0) {
+
+      $_SESSION["correo"]=$correo;
+      $_SESSION["correo_valido"]=0;
+      $_SESSION["password_error"]=0;
+      $_SESSION["correoRegistrado"]=0;
+      $_SESSION["variableBandera"]=0;
+      $url = "./";
+      header("HTTP/1.1 301 Moved Permanently");
+      header("Location: ".$url);
+      exit(); 
+      
+    }else{
+
+    
 
     if (password_verify($contrasena,$claveComprobar)) {
         
@@ -103,11 +123,13 @@ if ($detectarError==1) {
     }else{
 
       $_SESSION["correo"]=$reg['Usuario_email'];
+      
       $_SESSION["correo_valido"]=0;
       $_SESSION["password_error"]=1;
       $_SESSION["correoRegistrado"]=0;
       $_SESSION["variableBandera"]=0;
-      $url = "./";
+
+      $url = "./bloqueoUsuario.php";
       header("HTTP/1.1 301 Moved Permanently");
       header("Location: ".$url);
       exit(); 
@@ -118,6 +140,8 @@ if ($detectarError==1) {
     <?php
 
     }
+
+  }
     
   }else {
 
