@@ -4,6 +4,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $_SESSION['busquedaDni'] = $_POST['dni'];
+  $_SESSION["seleccion"] = $_POST["seleccion"];
 }
 
 $per_page_record = 4;
@@ -11,8 +12,15 @@ $per_page_record = 4;
 $conexion = mysqli_connect("localhost", "root", "", "usuarios") or
   die("Problemas con la conexion");
 
-$consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%'") or
+  if ($_SESSION["seleccion"]=="borrarUsuarios") {
+    $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%'") or
   die("Problemas en el select:" . mysqli_error($conexion));
+  }else{
+    $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' AND Usuario_bloqueado= '1'") or
+  die("Problemas en el select:" . mysqli_error($conexion));
+  }
+
+
 
 $reg = mysqli_num_rows($consulta);
 
@@ -26,8 +34,15 @@ if (!isset($_GET['page'])) {
 
 $start_from = ($page - 1) * $per_page_record;
 
-$consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' LIMIT " . $start_from . ',' . $per_page_record) or
+if ($_SESSION["seleccion"]=="borrarUsuarios") {
+  $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' LIMIT " . $start_from . ',' . $per_page_record) or
   die("Problemas en el select:" . mysqli_error($conexion));
+}else{
+  $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' AND Usuario_bloqueado= '1' LIMIT " . $start_from . ',' . $per_page_record) or
+  die("Problemas en el select:" . mysqli_error($conexion));
+}
+
+
 
 ?>
 
@@ -115,76 +130,151 @@ $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LI
     </div>
   </nav>
 
-  <form action="./borrado.php" method="POST">
+  <?php
 
-    <table class="table table-hover table-responsive">
-      <thead class="thead-dark">
-        <tr>
-          <th>Marcar</th>
-          <th>Id</th>
-          <th>Nombre</th>
-          <th>Primer Apellido</th>
-          <th>Segundo Apellido</th>
-          <th>Usuario_email</th>
-          <th>Usuario_domicilio</th>
-          <th>Usuario_nif</th>
-          <th>Usuario_numero_telefono</th>
-          <th>Usuario_fecha_nacimiento</th>
-          <th>Usuario_perfil</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-        while ($reg = mysqli_fetch_array($consulta)) {
-          echo "<tr>";
-          echo "<td><input type='checkbox' name='seleccion[]' value='" . $reg['Usuario_id'] . "'></input></td>";
-          echo "<td>" . $reg['Usuario_id'] . "</td>";
-          echo "<td>" . $reg['Usuario_nombre'] . "</td>";
-          echo "<td>" . $reg['Usuario_apellido1'] . "</td>";
-          echo "<td>" . $reg['Usuario_apellido2'] . "</td>";
-          echo "<td>" . $reg['Usuario_email'] . "</td>";
-          echo "<td>" . $reg['Usuario_domicilio'] . "</td>";
-          echo "<td>" . $reg['Usuario_nif'] . "</td>";
-          echo "<td>" . $reg['Usuario_numero_telefono'] . "</td>";
-          echo "<td>" . $reg['Usuario_fecha_nacimiento'] . "</td>";
-          echo "<td>" . $reg['Usuario_perfil'] . "</td>";
-          echo "</tr>";
-        }
-        ?>
-      </tbody>
+  if ($_SESSION["seleccion"] == "borrarUsuarios") {
 
-      
 
-    </table>
+  ?>
 
-    <nav aria-label="...">
-      <ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a class="page-link" href="./?page=1" tabindex="-1">Anterior</a>
-        </li>
+    <form action="./borrado.php" method="POST">
 
-        <?php
-        for ($page = 1; $page <= $total_pages; $page++) {
-          echo "<li class='page-item'><a class='page-link' href='./?page=" . $page . "'>" . $page . "</a></li>";
-        }
-        ?>
-        <li class="page-item">
-          <a class="page-link" href="./?page=<?php echo $total_pages ?>">Último</a>
-        </li>
+      <table class="table table-hover table-responsive">
+        <thead class="thead-dark">
+          <tr>
+            <th>Marcar</th>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Primer Apellido</th>
+            <th>Segundo Apellido</th>
+            <th>Usuario_email</th>
+            <th>Usuario_domicilio</th>
+            <th>Usuario_nif</th>
+            <th>Usuario_numero_telefono</th>
+            <th>Usuario_fecha_nacimiento</th>
+            <th>Usuario_perfil</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          while ($reg = mysqli_fetch_array($consulta)) {
+            echo "<tr>";
+            echo "<td><input type='checkbox' name='seleccion[]' value='" . $reg['Usuario_id'] . "'></input></td>";
+            echo "<td>" . $reg['Usuario_id'] . "</td>";
+            echo "<td>" . $reg['Usuario_nombre'] . "</td>";
+            echo "<td>" . $reg['Usuario_apellido1'] . "</td>";
+            echo "<td>" . $reg['Usuario_apellido2'] . "</td>";
+            echo "<td>" . $reg['Usuario_email'] . "</td>";
+            echo "<td>" . $reg['Usuario_domicilio'] . "</td>";
+            echo "<td>" . $reg['Usuario_nif'] . "</td>";
+            echo "<td>" . $reg['Usuario_numero_telefono'] . "</td>";
+            echo "<td>" . $reg['Usuario_fecha_nacimiento'] . "</td>";
+            echo "<td>" . $reg['Usuario_perfil'] . "</td>";
+            echo "</tr>";
+          }
+          ?>
+        </tbody>
 
-      </ul>
 
-      <div style="margin-left: 35%;">
 
-      <input class="btn btn-danger" type="submit" value="Borrar Registros"/>
+      </table>
+
+    <?php
+  } else {
+
+    ?>
+
+      <form action="./desbloquear.php" method="POST">
+
+        <table class="table table-hover table-responsive">
+          <thead class="thead-dark">
+            <tr>
+              <th>Marcar</th>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Primer Apellido</th>
+              <th>Segundo Apellido</th>
+              <th>Usuario_email</th>
+              <th>Usuario_domicilio</th>
+              <th>Usuario_nif</th>
+              <th>Usuario_numero_telefono</th>
+              <th>Usuario_fecha_nacimiento</th>
+              <th>Usuario_perfil</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            while ($reg = mysqli_fetch_array($consulta)) {
+              echo "<tr>";
+              echo "<td><input type='checkbox' name='seleccion[]' value='" . $reg['Usuario_id'] . "'></input></td>";
+              echo "<td>" . $reg['Usuario_id'] . "</td>";
+              echo "<td>" . $reg['Usuario_nombre'] . "</td>";
+              echo "<td>" . $reg['Usuario_apellido1'] . "</td>";
+              echo "<td>" . $reg['Usuario_apellido2'] . "</td>";
+              echo "<td>" . $reg['Usuario_email'] . "</td>";
+              echo "<td>" . $reg['Usuario_domicilio'] . "</td>";
+              echo "<td>" . $reg['Usuario_nif'] . "</td>";
+              echo "<td>" . $reg['Usuario_numero_telefono'] . "</td>";
+              echo "<td>" . $reg['Usuario_fecha_nacimiento'] . "</td>";
+              echo "<td>" . $reg['Usuario_perfil'] . "</td>";
+              echo "</tr>";
+            }
+            ?>
+          </tbody>
+
+
+
+        </table>
+
+      <?php
+    }
+      ?>
+
+      <nav aria-label="...">
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+            <a class="page-link" href="./?page=1" tabindex="-1">Anterior</a>
+          </li>
+
+          <?php
+          for ($page = 1; $page <= $total_pages; $page++) {
+            echo "<li class='page-item'><a class='page-link' href='./?page=" . $page . "'>" . $page . "</a></li>";
+          }
+          ?>
+          <li class="page-item">
+            <a class="page-link" href="./?page=<?php echo $total_pages ?>">Último</a>
+          </li>
+
+        </ul>
+
+
+
+        <div style="margin-left: 5%;">
+
+          <?php
+
+          if ($_SESSION["seleccion"] == "borrarUsuarios") {
+
+          ?>
+
+            <input class="btn btn-danger" type="submit" value="Borrar Registros" />
+
+          <?php
+          } else {
+
+          ?>
+            <input class="btn btn-danger" type="submit" value="Desbloquear Usuarios" />
+          <?php
+          }
+          ?>
+
+        </div>
+
+      </nav>
+
+      </form>
 
       </div>
-
-    </nav>
-
-    </form>
-
-    </div>
 </body>
 
 </html>

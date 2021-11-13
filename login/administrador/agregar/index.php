@@ -76,7 +76,7 @@ session_start();
     <?php echo $_SESSION["correo"] ?> 
     </button>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="./buscarDetalles.php">Editar Perfil</a>
+      <a class="dropdown-item" href="../../modificarPerfil/buscarDetalles.php">Editar Perfil</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="../../borrado.php"  >Login Out</a>
     </div>

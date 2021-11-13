@@ -101,9 +101,17 @@ session_start();
         ?>
 
 
-<div class="container" style="width: 50%;">
+<div class="container" style="width: 50%; margin-top: 5%;">
+
+<h1>BUSCAR USUARIOS</h1>
 
 <form action="./mostrarTabla/" method="POST">
+  <label for="seleccion" class="form-label">Seleccion: </label>
+  <select name="seleccion">
+        <option value="desbloquear">DESBLOQUEAR USUARIOS</option>
+        <option value="borrarUsuarios">BORRAR USUARIOS</option>
+  </select>
+  <br>
   <label for="dni" class="form-label">DNI USUARIOS</label>
   <input name="dni" type="number" class="form-control" required></input>
   <input style="margin-top: 15px; margin-left: 40%;" type="submit" value="BUSCAR USUARIOS">
