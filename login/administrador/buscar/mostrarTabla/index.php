@@ -15,8 +15,11 @@ $conexion = mysqli_connect("localhost", "root", "", "usuarios") or
   if ($_SESSION["seleccion"]=="borrarUsuarios") {
     $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%'") or
   die("Problemas en el select:" . mysqli_error($conexion));
-  }else{
+  }else if($_SESSION["seleccion"]=="desbloquear"){
     $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' AND Usuario_bloqueado= '1'") or
+  die("Problemas en el select:" . mysqli_error($conexion));
+  }else{
+    $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%'") or
   die("Problemas en el select:" . mysqli_error($conexion));
   }
 
@@ -37,8 +40,11 @@ $start_from = ($page - 1) * $per_page_record;
 if ($_SESSION["seleccion"]=="borrarUsuarios") {
   $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' LIMIT " . $start_from . ',' . $per_page_record) or
   die("Problemas en el select:" . mysqli_error($conexion));
-}else{
+}else if($_SESSION["seleccion"]=="desbloquear"){
   $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' AND Usuario_bloqueado= '1' LIMIT " . $start_from . ',' . $per_page_record) or
+  die("Problemas en el select:" . mysqli_error($conexion));
+}else{
+  $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' AND Usuario_perfil= 'CLIENTE' LIMIT " . $start_from . ',' . $per_page_record) or
   die("Problemas en el select:" . mysqli_error($conexion));
 }
 
@@ -180,7 +186,7 @@ if ($_SESSION["seleccion"]=="borrarUsuarios") {
       </table>
 
     <?php
-  } else {
+  } else if($_SESSION["seleccion"] == "desbloquear") {
 
     ?>
 
@@ -227,8 +233,55 @@ if ($_SESSION["seleccion"]=="borrarUsuarios") {
         </table>
 
       <?php
-    }
+    }else if($_SESSION["seleccion"] == "editarUsuarios") {
+
       ?>
+  
+        <form action="./editar.php" method="POST">
+  
+          <table class="table table-hover table-responsive">
+            <thead class="thead-dark">
+              <tr>
+                <th>Marcar</th>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Primer Apellido</th>
+                <th>Segundo Apellido</th>
+                <th>Usuario_email</th>
+                <th>Usuario_domicilio</th>
+                <th>Usuario_nif</th>
+                <th>Usuario_numero_telefono</th>
+                <th>Usuario_fecha_nacimiento</th>
+                <th>Usuario_perfil</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              while ($reg = mysqli_fetch_array($consulta)) {
+                echo "<tr>";
+                echo "<td><input type='checkbox' name='seleccion[]' value='" . $reg['Usuario_id'] . "'></input></td>";
+                echo "<td>" . $reg['Usuario_id'] . "</td>";
+                echo "<td>" . $reg['Usuario_nombre'] . "</td>";
+                echo "<td>" . $reg['Usuario_apellido1'] . "</td>";
+                echo "<td>" . $reg['Usuario_apellido2'] . "</td>";
+                echo "<td>" . $reg['Usuario_email'] . "</td>";
+                echo "<td>" . $reg['Usuario_domicilio'] . "</td>";
+                echo "<td>" . $reg['Usuario_nif'] . "</td>";
+                echo "<td>" . $reg['Usuario_numero_telefono'] . "</td>";
+                echo "<td>" . $reg['Usuario_fecha_nacimiento'] . "</td>";
+                echo "<td>" . $reg['Usuario_perfil'] . "</td>";
+                echo "</tr>";
+              }
+              ?>
+            </tbody>
+  
+  
+  
+          </table>
+  
+        <?php
+      }
+        ?>
 
       <nav aria-label="...">
         <ul class="pagination justify-content-center">
@@ -260,10 +313,14 @@ if ($_SESSION["seleccion"]=="borrarUsuarios") {
             <input class="btn btn-danger" type="submit" value="Borrar Registros" />
 
           <?php
-          } else {
+          } else if($_SESSION["seleccion"] == "desbloquear") {
 
           ?>
             <input class="btn btn-danger" type="submit" value="Desbloquear Usuarios" />
+          <?php
+          }else if($_SESSION["seleccion"] == "editarUsuarios"){
+            ?>
+            <input class="btn btn-danger" type="submit" value="Editar Usuarios" />
           <?php
           }
           ?>

@@ -110,6 +110,7 @@ session_start();
   <select name="seleccion">
         <option value="desbloquear">DESBLOQUEAR USUARIOS</option>
         <option value="borrarUsuarios">BORRAR USUARIOS</option>
+        <option value="editarUsuarios">EDITAR USUARIOS</option>
   </select>
   <br>
   <label for="dni" class="form-label">DNI USUARIOS</label>
