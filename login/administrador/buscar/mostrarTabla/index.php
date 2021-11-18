@@ -4,22 +4,25 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $_SESSION['busquedaDni'] = $_POST['dni'];
+  $_SESSION['busquedaProvincia'] = $_POST['provincia'];
+  $_SESSION['busquedaEmail'] = $_POST['email'];
   $_SESSION["seleccion"] = $_POST["seleccion"];
 }
-
+echo $_SESSION['busquedaProvincia'];
 $per_page_record = 4;
 
 $conexion = mysqli_connect("localhost", "root", "", "usuarios") or
   die("Problemas con la conexion");
 
+  //AND Usuario_email LIKE '%" . $_SESSION['busquedaEmail'] . "%' AND Usuario_provincia LIKE '%" . $_SESSION['busquedaProvincia'] . "%'
   if ($_SESSION["seleccion"]=="borrarUsuarios") {
-    $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%'") or
+    $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' OR Usuario_email LIKE '%" . $_SESSION['busquedaEmail'] . "%' OR Usuario_provincia LIKE '%" . $_SESSION['busquedaProvincia'] . "%'") or
   die("Problemas en el select:" . mysqli_error($conexion));
   }else if($_SESSION["seleccion"]=="desbloquear"){
-    $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' AND Usuario_bloqueado= '1'") or
+    $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' OR Usuario_bloqueado= '1'  OR Usuario_email LIKE '%" . $_SESSION['busquedaEmail'] . "%' OR Usuario_provincia LIKE '%" . $_SESSION['busquedaProvincia'] . "%' ") or
   die("Problemas en el select:" . mysqli_error($conexion));
   }else{
-    $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%'") or
+    $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%'  OR Usuario_perfil= 'CLIENTE' OR Usuario_email LIKE '%" . $_SESSION['busquedaEmail'] . "%' OR Usuario_provincia LIKE '%" . $_SESSION['busquedaProvincia'] . "%' ") or
   die("Problemas en el select:" . mysqli_error($conexion));
   }
 
@@ -34,17 +37,28 @@ if (!isset($_GET['page'])) {
 } else {
   $page  = $_GET['page'];
 }
+/*
+if (!isset($_SESSION["busquedaDni"])) {
+
+  $_SESSION["busquedaDni"]="";
+  $_SESSION["busquedaProvincia"]="";
+  $_SESSION["busquedaEmail"]="";
+
+}
+*/
+
+
 
 $start_from = ($page - 1) * $per_page_record;
 
 if ($_SESSION["seleccion"]=="borrarUsuarios") {
-  $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' LIMIT " . $start_from . ',' . $per_page_record) or
+  $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' OR Usuario_email LIKE '%" . $_SESSION['busquedaEmail'] . "%' OR Usuario_provincia LIKE '%" . $_SESSION['busquedaProvincia'] . "%' LIMIT " . $start_from . ',' . $per_page_record) or
   die("Problemas en el select:" . mysqli_error($conexion));
 }else if($_SESSION["seleccion"]=="desbloquear"){
-  $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' AND Usuario_bloqueado= '1' LIMIT " . $start_from . ',' . $per_page_record) or
+  $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' OR Usuario_bloqueado= '1'  OR Usuario_email LIKE '%" . $_SESSION['busquedaEmail'] . "%' OR Usuario_provincia LIKE '%" . $_SESSION['busquedaProvincia'] . "%' LIMIT " . $start_from . ',' . $per_page_record) or
   die("Problemas en el select:" . mysqli_error($conexion));
 }else{
-  $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' AND Usuario_perfil= 'CLIENTE' LIMIT " . $start_from . ',' . $per_page_record) or
+  $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE Usuario_nif LIKE '%" . $_SESSION['busquedaDni'] . "%' OR Usuario_perfil= 'CLIENTE'  OR Usuario_email LIKE '%" . $_SESSION['busquedaEmail'] . "%' OR Usuario_provincia LIKE '%" . $_SESSION['busquedaProvincia'] . "%'  LIMIT " . $start_from . ',' . $per_page_record) or
   die("Problemas en el select:" . mysqli_error($conexion));
 }
 

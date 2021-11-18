@@ -114,7 +114,11 @@ session_start();
   </select>
   <br>
   <label for="dni" class="form-label">DNI USUARIOS</label>
-  <input name="dni" type="number" class="form-control" required></input>
+  <input name="dni" type="number" class="form-control" value="" ></input>
+  <label for="provincia" class="form-label">PROVINCIA</label>
+  <input name="provincia" type="text" class="form-control" value=""  ></input>
+  <label for="email" class="form-label">EMAIL</label>
+  <input name="email" type="text" class="form-control" value=""  ></input>
   <input style="margin-top: 15px; margin-left: 40%;" type="submit" value="BUSCAR USUARIOS">
 </form>
 
