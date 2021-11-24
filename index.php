@@ -13,6 +13,7 @@ session_start();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="javaScript.js"></script>
     
     <title>MI PAGINA</title>
     <script>
@@ -29,6 +30,12 @@ session_start();
 
                return comprobado;
             }
+
+            function foco(){
+                document.getElementById("map").focus;
+            }
+
+
       </script>
 
 
@@ -350,6 +357,32 @@ session_start();
 }
 
 ?>
+
+
+
+<footer class="bg-dark p-3 mt-3">
+
+<a class="btn btn-primary" onclick="" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  ¿Donde estamos?
+</a>
+
+<div class="container text-center">
+<div class="collapse" id="collapseExample">
+
+<div id="map" class="border border-primary mt-3">
+    </div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaKdY_hkr3T1gjgR4weiIZrlJJ4a7kqr0&callback=initMap&v=weekly" async ></script>
+
+  </div>
+
+</div>
+
+<div class="text-center text-primary mt-3">
+    REALIZADO POR JOSE ANTONIO MARQUEZ GONZALEZ
+</div>
+
+</footer>
     
 </body>
 </html>
