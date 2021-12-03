@@ -38,6 +38,15 @@ session_start();
 
       </script>
 
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLWQ6MQFWM"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-CLWQ6MQFWM');
+        </script>
+
 
 </head>
 <body>

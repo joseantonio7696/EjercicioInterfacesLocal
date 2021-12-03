@@ -20,6 +20,11 @@ if ( !is_null($_SESSION["correo"])) {
     width: 200px;
     background: #aaa;
   }
+
+  #map{
+    width: 100%;
+    height: 400px;
+}
   </style>
 </head>
 <body>
@@ -95,6 +100,17 @@ if ($_SESSION["Usuario_perfil"]=="ADMINISTRADOR") {
       <?php
       }
       ?>
+    </div>
+    <div class="col-8">
+
+   <?php include "./ubicacionImagen.php" ;
+
+   ?>
+
+    <div id="map"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaKdY_hkr3T1gjgR4weiIZrlJJ4a7kqr0&callback=initMap&v=weekly" async ></script>
+
     </div>
   </div>
 </div>
